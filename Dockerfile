@@ -9,7 +9,8 @@ RUN mvn clean package -DskipTests
 
 # Copie o arquivo JAR da sua aplicação para dentro do contêiner
 FROM eclipse-temurin:17-jre-alpine
-COPY target/download-upload-files-0.0.1-SNAPSHOT.jar my-app.jar
+COPY --from=builder target/*.jar my-app.jar
+EXPOSE 8080
 
 # Comando para executar a aplicação quando o contêiner for iniciado
 CMD ["java", "-jar", "my-app.jar"]
