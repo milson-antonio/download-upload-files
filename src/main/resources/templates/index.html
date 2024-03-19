@@ -6,49 +6,38 @@
 <head>
     <title>My To do List</title>
 </head>
-<section layout:fragment="content" style="min-height: 90vh; background-color: lightgray; margin-top:5%">
+<section layout:fragment="content" style="min-height: 90vh; background-color: white; margin-top:5%">
 
-    <div class="container">
+    <div class="container" style="margin-top:5%">
 
-    <div class="row">
-        <div class="col-lg-6 offset-lg-3">
-            <div class="card">
-                <div class="card-header bg-primary text-white">
-                    <h2 class="card-title">Upload de Arquivos</h2>
+        <div class="card-body">
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <input type="file" name="file" class="form-control" style="width: 400px;">
                 </div>
-                <div class="card-body">
-                    <form action="/upload" method="post" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <input type="file" name="file" class="form-control">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Enviar</button>
-                    </form>
-                </div>
-            </div>
-
-            <div th:if="${message}" class="mt-3">
-                <div class="alert alert-success" role="alert">
-                    <p th:text="${message}"></p>
-                </div>
-            </div>
-
-            <div class="mt-4">
-                <h3>Lista de Arquivos:</h3>
-                <ul class="list-group">
-                    <li th:each="file : ${#strings.arraySplit(files, ',')}" class="list-group-item d-flex justify-content-between align-items-center">
-                        <span th:text="${file}"></span>
-                        <a th:href="@{/download/{filename}(filename=${file})}" class="btn btn-sm btn-success">Baixar</a>
-                    </li>
-                </ul>
-            </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
         </div>
-    </div>
-    </div>
 
+        <table class="table table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col" style="text-align: center;">#</th>
+                <th scope="col" style="text-align: center;">File Name</th>
+                <th scope="col" style="text-align: center;">Date</th>
+                <th scope="col" style="text-align: center;">File Size</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="file, index : ${fileList}">
+                <td th:text="${index.index + 1}"></td>
+                <td th:text="${file.fileName}" style="text-align: center;"></td>
+                <td th:text="${#temporals.format(file.uploadDate, 'dd/MM/yyyy HH:mm:ss')}"
+                    style="text-align: center;"></td>
+                <td th:text="${file.fileSize}" style="text-align: center;"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </section>
 </html>
-
-
-
-
-
