@@ -32,11 +32,12 @@ public class MyFileService {
      */
 
     public void addFile(final MultipartFile file){
-        myFileRepository.save(convertMultipartFileToMyFile(file));
+        MyFile myFile = convertMultipartFileToMyFile(file);
+        myFileRepository.save(myFile);
     }
 
 
-    private MyFile convertMultipartFileToMyFile(final MultipartFile file){
+    public MyFile convertMultipartFileToMyFile(final MultipartFile file){
         MyFile myFile = new MyFile();
         myFile.setFileName(file.getOriginalFilename());
         myFile.setFileSize(String.valueOf(file.getSize()));
