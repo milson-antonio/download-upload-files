@@ -40,30 +40,39 @@ public class MyFileController {
         model.addAttribute("categories", myFileService.getCategories());
         model.addAttribute("alertMessage", alertMessage);
         model.addAttribute("downloadedFile", downloadedFile);
+        model.addAttribute("showModal", true);
         return "index";
     }
 
     @PostMapping("/upload")
-    public String uploadFile(@RequestParam("file") MultipartFile  file,
+    public ModelAndView uploadFile(@RequestParam("file") MultipartFile  file,
                              @RequestParam("category") String category,
-                             RedirectAttributes attributes) {
+                             RedirectAttributes attributes)  {
+
+        ModelAndView mv = new ModelAndView("components/file-table");
+
         try {
-            if (file.isEmpty()) {
-                attributes.addFlashAttribute("alertMessage", "Error: Selecione um arquivo para fazer upload.");
-                return "redirect:/";
-            }
             myFileService.saveFile(file, Category.fromString(category));
-            attributes.addFlashAttribute("fileList", myFileService.getMyFileList());
-            attributes.addFlashAttribute("alertMessage", "The file was sent successfully.");
-            return "redirect:/";
+            mv.addObject("fileList", myFileService.getMyFileList());
+            mv.addObject("categories", myFileService.getCategories());
         } catch (FileSizeException | MaximumNumberOfFilesExceptions e) {
-            attributes.addFlashAttribute("alertMessage", e.getMessage());
+            mv.addObject("fileList", myFileService.getMyFileList());
+            mv.addObject("categories", myFileService.getCategories());
+            mv.addObject("showModal", true);
+            mv.addObject("alertMessage", e.getMessage());
         } catch (IOException e) {
-            attributes.addFlashAttribute("alertMessage", "Error: when processing the file.");
+            mv.addObject("fileList", myFileService.getMyFileList());
+            mv.addObject("categories", myFileService.getCategories());
+            mv.addObject("showModal", true);
+            mv.addObject("alertMessage", "Error: when processing the file.");
         } catch (Exception e) {
-            attributes.addFlashAttribute("alertMessage", "Error: unknown when uploading the file.");
+            mv.addObject("fileList", myFileService.getMyFileList());
+            mv.addObject("categories", myFileService.getCategories());
+            mv.addObject("showModal", true);
+            mv.addObject("alertMessage", "Error: unknown when uploading the file.");
         }
-        return "redirect:/";
+
+        return mv;
     }
 
 
@@ -72,6 +81,8 @@ public class MyFileController {
         ModelAndView mv = new ModelAndView("components/file-table");
         myFileService.deleteFile(id);
         mv.addObject("fileList", myFileService.getMyFileList());
+        mv.addObject("categories", myFileService.getCategories());
+        mv.addObject("alertMessage", "");
         return mv;
     }
 

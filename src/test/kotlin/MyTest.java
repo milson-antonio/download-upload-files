@@ -31,7 +31,7 @@ public class MyTest {
 
         // Simular o comportamento do método getSize() para retornar um tipo long
         when(mockFile.getOriginalFilename()).thenReturn("arquivo.txt");
-        when(mockFile.getSize()).thenReturn(100L); // Exemplo de tamanho fictício
+        when(mockFile.getSize()).thenReturn(1L); // Exemplo de tamanho fictício
 
         //MyFileDTO myFileDTO = new MyFileDTO();
         //myFileDTO.setFile(mockFile);
