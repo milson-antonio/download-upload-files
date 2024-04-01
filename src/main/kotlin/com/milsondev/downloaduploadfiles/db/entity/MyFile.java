@@ -1,5 +1,6 @@
 package com.milsondev.downloaduploadfiles.db.entity;
 
+import com.milsondev.downloaduploadfiles.api.Category;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -14,14 +15,27 @@ public class MyFile {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(name = "id", columnDefinition = "uuid")
     private UUID id;
-    @Column(name="file_name")
-    private String fileName;
+    @Column(name="name")
+    private String name;
 
     @Column(name="upload_date")
     private Instant uploadDate;
 
-    @Column(name="file_size")
-    private String FileSize;
+    @Column(name="size")
+    private String size;
+
+    @Column(name="content")
+    private byte[] content;
+
+    @Column(name = "category")
+    @Enumerated(EnumType.STRING)
+    private Category category;
+
+    @Column(name="original_file_name")
+    private String originalFilename;
+
+    @Column(name="content_type")
+    private String contentType;
 
     public MyFile() {
 
@@ -35,12 +49,12 @@ public class MyFile {
         this.id = id;
     }
 
-    public String getFileName() {
-        return fileName;
+    public String getName() {
+        return name;
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Instant getUploadDate() {
@@ -51,11 +65,43 @@ public class MyFile {
         this.uploadDate = uploadDate;
     }
 
-    public String getFileSize() {
-        return FileSize;
+    public String getSize() {
+        return size;
     }
 
-    public void setFileSize(String fileSize) {
-        FileSize = fileSize;
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public byte[] getContent() {
+        return content;
+    }
+
+    public void setContent(byte[] content) {
+        this.content = content;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public String getOriginalFilename() {
+        return originalFilename;
+    }
+
+    public void setOriginalFilename(String originalFilename) {
+        this.originalFilename = originalFilename;
+    }
+
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
     }
 }

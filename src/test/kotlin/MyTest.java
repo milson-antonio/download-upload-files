@@ -1,3 +1,4 @@
+import com.milsondev.downloaduploadfiles.api.Category;
 import com.milsondev.downloaduploadfiles.db.entity.MyFile;
 import com.milsondev.downloaduploadfiles.db.repository.MyFileRepository;
 import com.milsondev.downloaduploadfiles.service.MyFileService;
@@ -24,7 +25,7 @@ public class MyTest {
     }
 
     @Test
-    public void testAddFile() {
+    public void testAddFile() throws IOException {
         // Criar um arquivo mock
         MultipartFile mockFile = mock(MultipartFile.class);
 
@@ -32,8 +33,12 @@ public class MyTest {
         when(mockFile.getOriginalFilename()).thenReturn("arquivo.txt");
         when(mockFile.getSize()).thenReturn(100L); // Exemplo de tamanho fictício
 
+        //MyFileDTO myFileDTO = new MyFileDTO();
+        //myFileDTO.setFile(mockFile);
+        //myFileDTO.setCategory(Category.CV);
+
         // Chamar o método addFile
-        myFileService.addFile(mockFile);
+        myFileService.saveFile(mockFile, Category.CV);
 
         // Verificar se o método save do myFileRepository foi chamado com o myFile correto
         verify(myFileRepository, times(1)).save(any(MyFile.class)); // Verificar se qualquer MyFile foi passado
