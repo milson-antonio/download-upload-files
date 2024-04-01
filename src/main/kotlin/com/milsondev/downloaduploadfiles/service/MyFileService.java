@@ -22,9 +22,11 @@ import java.util.UUID;
 public class MyFileService {
     private final MyFileRepository myFileRepository;
 
-    private long MAX_FILE_SIZE = 1048576;
+    @Value("${max.file.size:1048576}")
+    private long MAX_FILE_SIZE;
 
-    private long MAX_NUMBER_OF_FILES = 10;
+    @Value("${max.number.of.files:10}")
+    private long MAX_NUMBER_OF_FILES;
 
     @Autowired
     public MyFileService(final MyFileRepository myFileRepository) {
