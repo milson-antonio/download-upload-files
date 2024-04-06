@@ -24,9 +24,6 @@ public class MyFile {
     @Column(name="size")
     private String size;
 
-    @Column(name="content")
-    private byte[] content;
-
     @Column(name = "category")
     @Enumerated(EnumType.STRING)
     private Category category;
@@ -36,6 +33,12 @@ public class MyFile {
 
     @Column(name="content_type")
     private String contentType;
+
+    @Column(name ="check_sum")
+    private Long checksum;
+
+    @Transient
+    private byte[] content;
 
     public MyFile() {
 
@@ -73,14 +76,6 @@ public class MyFile {
         this.size = size;
     }
 
-    public byte[] getContent() {
-        return content;
-    }
-
-    public void setContent(byte[] content) {
-        this.content = content;
-    }
-
     public Category getCategory() {
         return category;
     }
@@ -103,5 +98,21 @@ public class MyFile {
 
     public void setContentType(String contentType) {
         this.contentType = contentType;
+    }
+
+    public Long getChecksum() {
+        return checksum;
+    }
+
+    public void setChecksum(Long checksum) {
+        this.checksum = checksum;
+    }
+
+    public byte[] getContent() {
+        return content;
+    }
+
+    public void setContent(byte[] content) {
+        this.content = content;
     }
 }

@@ -4,12 +4,12 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>My To do List</title>
+    <title>Upload and Download Files</title>
 </head>
-<section layout:fragment="content" style="min-height: 90vh; background-color: white; margin-top:5%">
-    <div id="table-container" class="container">
-    <!--<div th:if="${alertMessage != null && alertMessage != ''}" class="panel-heading" th:replace="~{components/alert.html}"></div>-->
-    <div class="container" style="margin-top:5%">
+<section layout:fragment="content" style="min-height: 90vh; background-color: white; margin-top:5%" id="table-container">
+    <div class="container">
+        <div th:if="${showAlert && alertMessage != null && alertMessage != ''}" class="panel-heading" th:replace="~{components/alert.html}"></div>
+        <div class="container" style="margin-top:5%">
         <div class="container" style="margin-bottom:5%">
             <form id="form" hx-encoding="multipart/form-data" hx-post="/upload" hx-target="#table-container">
                 <div class="row">
@@ -40,42 +40,6 @@
                 label.innerHTML = fileName;
             }
         </script>
-
-
-        <!-- modal -->
-        <script th:inline="javascript">
-            var showModal = /*[[${showModal}]]*/;
-            console.log(showModal);
-            document.addEventListener("DOMContentLoaded", function() {
-            if (showModal) {
-                var button = document.querySelector(".btn-primary[data-toggle='modal']");
-                if (button) {
-                    button.click();
-                }
-            }
-            });
-        </script>
-        <button type="button" class="btn btn-primary d-none" data-toggle="modal" data-target="#exampleModal">
-            Launch demo modal
-        </button>
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Error</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <h4 th:text="${alertMessage}"></h4>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
         <table class="table table-striped">
             <thead class="thead-dark">

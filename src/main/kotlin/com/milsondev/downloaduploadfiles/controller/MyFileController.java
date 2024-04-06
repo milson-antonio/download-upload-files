@@ -2,10 +2,10 @@ package com.milsondev.downloaduploadfiles.controller;
 
 import com.milsondev.downloaduploadfiles.api.Category;
 import com.milsondev.downloaduploadfiles.db.entity.MyFile;
+import com.milsondev.downloaduploadfiles.exceptions.DuplicateFileException;
 import com.milsondev.downloaduploadfiles.exceptions.FileSizeException;
 import com.milsondev.downloaduploadfiles.exceptions.MaximumNumberOfFilesExceptions;
 import com.milsondev.downloaduploadfiles.service.MyFileService;
-import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -33,19 +33,14 @@ public class MyFileController {
     }
 
     @GetMapping
-    public String home(Model model,
-                       @ModelAttribute("alertMessage") @Nullable String alertMessage,
-                       @ModelAttribute("downloadedFile") @Nullable MultipartFile downloadedFile) {
+    public String home(Model model) {
         model.addAttribute("fileList", myFileService.getMyFileList());
         model.addAttribute("categories", myFileService.getCategories());
-        model.addAttribute("alertMessage", alertMessage);
-        model.addAttribute("downloadedFile", downloadedFile);
-        model.addAttribute("showModal", true);
         return "index";
     }
 
     @PostMapping("/upload")
-    public ModelAndView uploadFile(@RequestParam("file") MultipartFile  file,
+    public ModelAndView uploadFile(@RequestParam("file") MultipartFile file,
                              @RequestParam("category") String category,
                              RedirectAttributes attributes)  {
 
@@ -55,20 +50,21 @@ public class MyFileController {
             myFileService.saveFile(file, Category.fromString(category));
             mv.addObject("fileList", myFileService.getMyFileList());
             mv.addObject("categories", myFileService.getCategories());
-        } catch (FileSizeException | MaximumNumberOfFilesExceptions e) {
+            mv.addObject("showAlert", false);
+        } catch (FileSizeException | MaximumNumberOfFilesExceptions | DuplicateFileException e) {
             mv.addObject("fileList", myFileService.getMyFileList());
             mv.addObject("categories", myFileService.getCategories());
-            mv.addObject("showModal", true);
+            mv.addObject("showAlert", true);
             mv.addObject("alertMessage", e.getMessage());
         } catch (IOException e) {
             mv.addObject("fileList", myFileService.getMyFileList());
             mv.addObject("categories", myFileService.getCategories());
-            mv.addObject("showModal", true);
+            mv.addObject("showAlert", true);
             mv.addObject("alertMessage", "Error: when processing the file.");
         } catch (Exception e) {
             mv.addObject("fileList", myFileService.getMyFileList());
             mv.addObject("categories", myFileService.getCategories());
-            mv.addObject("showModal", true);
+            mv.addObject("showAlert", true);
             mv.addObject("alertMessage", "Error: unknown when uploading the file.");
         }
 
