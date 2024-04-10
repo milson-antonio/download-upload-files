@@ -14,6 +14,6 @@ CREATE TABLE IF NOT EXISTS tb_my_file (
 
 CREATE TABLE IF NOT EXISTS tb_my_file_content (
     id UUID PRIMARY KEY,
-    content BYTEA,
+    content OID,
     file_id UUID
 );
