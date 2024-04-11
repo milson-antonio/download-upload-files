@@ -32,7 +32,18 @@
             </form>
         </div>
 
-        <!-- rename the label with file name -->
+
+            <!-- progress bar-->
+            <div id="loading-indicator" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999;">
+                <div style="text-align: center;">
+                    <img src="img/loading.gif" alt="Carregando..." style="width: 50px; z-index: 9999;">
+                    <br>
+                    <span style="z-index: 9999;">CARREGANDO...</span>
+                </div>
+            </div>
+
+
+            <!-- rename the label with file name -->
         <script>
             function updateFileName(input) {
                 var fileName = input.files[0].name;
