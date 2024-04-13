@@ -76,7 +76,7 @@ public class MyFileController {
 
     @DeleteMapping(value = "/delete/{id}")
     public ModelAndView deleteFile(@PathVariable UUID id) {
-        ModelAndView mv = new ModelAndView("components/file-table");
+        ModelAndView mv = new ModelAndView("components/table");
         myFileService.deleteFile(id);
         mv.addObject("fileList", myFileService.getMyFileList());
         mv.addObject("categories", myFileService.getCategories());
