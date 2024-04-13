@@ -6,18 +6,16 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://my-app-1-0.onrender.com/">
+  <a href="https://my-app-1-0.onrender.com/" target="_blank">
     <img src="src/main/resources/static/img/ebook.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">Upload and Download Files</h3>
-
   <p align="center">
     Awesome Java and Spring Boot Project to Upload and Dowload Files!
     <br />
-    <br />
     ·
-    <a href="https://my-app-1-0.onrender.com/">View Live</a>
+    <a href="https://my-app-1-0.onrender.com/" target="_blank">View Live</a>
     ·
   </p>
 </div>
@@ -55,7 +53,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<a href="https://my-app-1-0.onrender.com/">
+<a href="https://my-app-1-0.onrender.com/" target="_blank">
     <img src="src/main/resources/static/img/gif.gif" alt="Logo">
 </a>
 
