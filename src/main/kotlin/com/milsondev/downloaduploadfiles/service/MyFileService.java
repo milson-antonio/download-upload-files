@@ -45,8 +45,8 @@ public class MyFileService {
 
     public void saveFile(final MultipartFile file, Category category) throws IOException {
         if(DELETE_AND_ADD_FILE){
-            if(getMyFileList().size() < MAX_NUMBER_OF_FILES ){
-                if(file.getSize() <= MAX_FILE_SIZE ){
+            if(getMyFileList().size() < MAX_NUMBER_OF_FILES  ){
+                if(file.getSize() / (1024 * 1024) <= MAX_FILE_SIZE ){
                     if(!isDuplicateFile(file)){
                         MyFile myFile = convertMultipartFileToMyFile(file, category);
                         UUID myFileId = myFileRepository.save(myFile).getId();

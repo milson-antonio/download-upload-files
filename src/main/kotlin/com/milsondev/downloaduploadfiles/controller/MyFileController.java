@@ -68,6 +68,7 @@ public class MyFileController {
             mv.addObject("alertMessage", "Error: unknown when uploading the file.");
         }
 
+        mv.addObject("serverResponse", true);
         return mv;
     }
 
