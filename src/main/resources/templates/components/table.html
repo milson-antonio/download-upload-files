@@ -2,7 +2,6 @@
   <div class="container" style="position: absolute; left: 50%; transform: translate(-50%, -50%); z-index: 9999;">
     <div th:if="${showAlert && alertMessage != null && alertMessage != ''}" th:replace="~{components/alert.html}"></div>
   </div>
-
   <div class="container"  style="padding-top:5%">
     <div class="container" style="margin-bottom:5%">
       <form id="form" hx-encoding="multipart/form-data" hx-post="/upload" hx-target="#table-container"
@@ -30,7 +29,7 @@
     <!-- progress bar-->
     <div id="loading-indicator" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999;">
       <div style="text-align: center;">
-        <img src="img/loading.gif" alt="Carregando..." style="width: 50px; z-index: 9999;">
+        <img src="img/loading.gif" alt="Loading..." style="width: 50px; z-index: 9999;">
         <br>
         <span style="z-index: 9999;">LOADING FILE...</span>
       </div>

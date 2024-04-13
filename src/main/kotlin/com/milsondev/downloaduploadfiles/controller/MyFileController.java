@@ -44,13 +44,14 @@ public class MyFileController {
                              @RequestParam("category") String category,
                              RedirectAttributes attributes)  {
 
-        ModelAndView mv = new ModelAndView("components/file-table");
+        ModelAndView mv = new ModelAndView("components/table");
 
         try {
             myFileService.saveFile(file, Category.fromString(category));
             mv.addObject("fileList", myFileService.getMyFileList());
             mv.addObject("categories", myFileService.getCategories());
-            mv.addObject("showAlert", false);
+            mv.addObject("showAlert", true);
+            mv.addObject("alertMessage", "File added successfully!");
         } catch (FileSizeException | MaximumNumberOfFilesExceptions | DuplicateFileException e) {
             mv.addObject("fileList", myFileService.getMyFileList());
             mv.addObject("categories", myFileService.getCategories());
@@ -60,12 +61,12 @@ public class MyFileController {
             mv.addObject("fileList", myFileService.getMyFileList());
             mv.addObject("categories", myFileService.getCategories());
             mv.addObject("showAlert", true);
-            mv.addObject("alertMessage", "Error: when processing the file.");
+            mv.addObject("alertMessage", "Error: when processing the file!");
         } catch (Exception e) {
             mv.addObject("fileList", myFileService.getMyFileList());
             mv.addObject("categories", myFileService.getCategories());
             mv.addObject("showAlert", true);
-            mv.addObject("alertMessage", "Error: unknown when uploading the file.");
+            mv.addObject("alertMessage", "Error: unknown when uploading the file!");
         }
 
         mv.addObject("serverResponse", true);

@@ -52,13 +52,13 @@ public class MyFileService {
                         UUID myFileId = myFileRepository.save(myFile).getId();
                         fileContentRepository.save(new FileContent(file.getBytes(), myFileId));
                     } else {
-                        throw new DuplicateFileException("Error: File "+ file.getOriginalFilename() +" already uploaded");
+                        throw new DuplicateFileException("Error: File "+ file.getOriginalFilename() +" already uploaded!");
                     }
                 } else {
-                    throw new FileSizeException("Error: The file you're trying to upload is too too large " + formatSize(file.getSize()));
+                    throw new FileSizeException("Error: The file you're trying to upload is too too large " + formatSize(file.getSize()) + "!");
                 }
             } else {
-                throw new MaximumNumberOfFilesExceptions("Error: You've reached the maximum number of allowed uploads. Please delete one to upload a new file.");
+                throw new MaximumNumberOfFilesExceptions("Error: You've reached the maximum number of allowed uploads. Please delete one to upload a new file!");
             }
         }
     }
