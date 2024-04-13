@@ -55,7 +55,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![](\src\main\resources\static\img\gif.gif)](https://my-app-1-0.onrender.com/)
+<a href="https://my-app-1-0.onrender.com/">
+    <img src="src/main/resources/static/img/gif.gif" alt="Logo">
+</a>
 
 There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
 
