@@ -12,6 +12,9 @@ FROM eclipse-temurin:17-jre-alpine
 COPY --from=builder target/*.jar my-app.jar
 EXPOSE 8080
 
+# Defina a variável de ambiente SPRING_PROFILES_ACTIVE para 'prod'
+ENV spring.profiles.active=prod
+
 # Comando para executar a aplicação quando o contêiner for iniciado
 CMD ["java", "-jar", "my-app.jar"]
 

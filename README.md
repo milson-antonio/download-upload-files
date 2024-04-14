@@ -68,8 +68,9 @@ A Seguir:
 * As duas primeiras regras sao customizaveis via variaveis de ambiente:smile:
 
 
-## Built With
+### Built With
 
+* ![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
 * ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 * ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
 * ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
@@ -81,42 +82,35 @@ A Seguir:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+Duas opcoes para executar a Aplicacao, pelo metodo tradicional, usando o Maven e isso exige a configuracao de um Banco 
+de Dados PostgreSQL. A outra forma é através do docker-compose que é mais facil, rapido e nao precisará de configuracao nenhuma. 
 
-### Prerequisites
+## Prerequisites and Installation
+### First Way:
+* Java 17 ou versao mais recente
+* Maven
+* PostgreSQL
+* Clone the repo:
+ ```sh
+ git clone https://github.com/Milsondepaz/download-upload-files.git
+ ```
+* Run from root directory:
+```sh
+mvn spring-boot:run
+```
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
-### Installation
-
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+### Second Way:
+* Docker
+* Docker-compose
+* Run from root directory
+```sh
+docker-compose up
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- USAGE EXAMPLES -->
