@@ -1,3 +1,4 @@
+<a name="readme-top"></a>
 <br />
 <div align="center">
   <a href="https://my-app-1-0.onrender.com/" target="_blank">
@@ -43,15 +44,14 @@
     <img src="src/main/resources/static/img/gif.gif" alt="Logo">
 </a>
 
-Trata-se ema aplicacao Web, intuitiva e muito simples de usar para fazer Upload de arquivos, que serao 
-salvos no Banco de Dados, e depois o usário pode fazer o Donwload dos mesmos. Existem algumas regras
-negocio simples.
+It's an intuitive and straightforward web application for **Uploading and Donwload Files**, which will be saved 
+in the database, and then the user can download them. There are some simple business rules in place.
 
-A Seguir:
-* Numero maximo de arquivos para fazer Upload
-* Tamanho do arquivo
-* Arquivos repetidos (possui mesmo nome, sequencia de bytes e tamanho)
-* As duas primeiras regras sao customizaveis via variaveis de ambiente:smile:
+Below are:
+* Maximum number of files for upload
+* File size
+* Duplicate files (having the same name, byte sequence, and size)
+* The first two rules are customizable via environment variables. 😊
 
 
 ## Built With
@@ -68,11 +68,10 @@ A Seguir:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- GETTING STARTED -->
 ## Getting Started
 
-Duas opcoes para executar a Aplicacao, pelo metodo tradicional, usando o Maven e isso exige a configuracao de um Banco 
-de Dados PostgreSQL. A outra forma é através do docker-compose que é mais facil, rapido e nao precisará de configuracao nenhuma. 
+Two options to run the application: the traditional method using Maven, which requires configuring a PostgreSQL database. 
+The other way is through docker-compose, which is easier, faster, and requires no configuration.
 
 ## Prerequisites and Installation
 * Docker
@@ -91,8 +90,8 @@ docker-compose up
 ## Contact
 
 - Milson António
-- milson.milson@outlook.com
-- LinkedIn
-- Youtube
+- E-mail: milson.milson@outlook.com
+- Telf: +49 160 7933151 | +49 1521 2816680
+- <a href="https://www.linkedin.com/in/milson-ant%C3%B3nio/" target="_blank">LinkedIn</a> | <a href="https://www.youtube.com/@MilsonDev" target="_blank">Youtube</a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
