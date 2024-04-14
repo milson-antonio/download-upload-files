@@ -95,11 +95,12 @@ de Dados PostgreSQL. A outra forma é através do docker-compose que é mais fac
 * PostgreSQL
 * Clone the repo:
  ```sh
- git clone https://github.com/Milsondepaz/download-upload-files.git
+ git clone https://github.com/Milsondepaz/download-upload-files.git 
  ```
+* Configure DB - application-dev.properties
 * Run from root directory:
 ```sh
-mvn spring-boot:run
+mvn spring-boot:run -P dev
 ```
 
 ### Second Way:

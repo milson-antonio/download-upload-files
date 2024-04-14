@@ -1,0 +1,57 @@
+version: '3.7'
+
+services:
+
+  download-upload-files:
+    image: maven:3.8.4-openjdk-17
+    container_name: download-upload-files
+    hostname: download-upload-files
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      DATABASE: "postgres"
+      USERNAME: "postgres"
+      PASSWORD: "postgres"
+      HOST: "postgres"
+      PORT: "5432"
+    volumes:
+      - ./src:/usr/src/app/src
+      - ./pom.xml:/usr/src/app/pom.xml
+    working_dir: /usr/src/app
+    command: mvn clean install -U -DskipTests spring-boot:run -P dev
+    networks:
+      - milsondev_network
+
+  postgres:
+    image: postgres:14.0
+    container_name: postgres
+    hostname: postgres
+    volumes:
+      - ./data/download-upload-files/data:/var/lib/postgresql/data
+      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+    environment:
+      PASSWORD: postgres
+      USERNAME: postgres
+      DATABASE: postgres
+    ports:
+      - 5432:5432
+    networks:
+      - milsondev_network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    hostname: pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=milson@milson.com
+      - PGADMIN_DEFAULT_PASSWORD=12345
+    ports:
+      - 8081:80
+    networks:
+      - milsondev_network
+
+networks:
+  milsondev_network:
+    driver: bridge

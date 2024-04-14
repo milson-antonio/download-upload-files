@@ -9,13 +9,13 @@ RUN mvn clean package -DskipTests
 
 # Copie o arquivo JAR da sua aplicação para dentro do contêiner
 FROM eclipse-temurin:17-jre-alpine
-COPY --from=builder target/*.jar my-app.jar
+COPY --from=builder target/*.jar download-upload-files.jar
 EXPOSE 8080
 
 # Defina a variável de ambiente SPRING_PROFILES_ACTIVE para 'prod'
 ENV spring.profiles.active=prod
 
 # Comando para executar a aplicação quando o contêiner for iniciado
-CMD ["java", "-jar", "my-app.jar"]
+CMD ["java", "-jar", "download-upload-files.jar"]
 
 
