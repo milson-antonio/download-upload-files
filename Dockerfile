@@ -14,6 +14,11 @@ EXPOSE 8080
 
 # Defina a variável de ambiente SPRING_PROFILES_ACTIVE para 'prod'
 ENV spring.profiles.active=prod
+ENV HOST=""
+ENV PORT=""
+ENV DATABASE=""
+ENV USERNAME=""
+ENV USERNAME=""
 
 # Comando para executar a aplicação quando o contêiner for iniciado
 CMD ["java", "-jar", "download-upload-files.jar"]
