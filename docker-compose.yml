@@ -9,7 +9,7 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - postgres
+      - postgres-download-upload-files
     environment:
       DATABASE: "postgres"
       USERNAME: "postgres"
@@ -24,10 +24,10 @@ services:
     networks:
       - milsondev_network
 
-  postgres:
+  postgres-download-upload-files:
     image: postgres:14.0
-    container_name: postgres
-    hostname: postgres
+    container_name: postgres-download-upload-files
+    hostname: postgres-download-upload-files
     volumes:
       - ./data/download-upload-files/data:/var/lib/postgresql/data
       - ./db.sql:/docker-entrypoint-initdb.d/db.sql
@@ -37,18 +37,6 @@ services:
       DATABASE: postgres
     ports:
       - 5432:5432
-    networks:
-      - milsondev_network
-
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: pgadmin
-    hostname: pgadmin
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=milson@milson.com
-      - PGADMIN_DEFAULT_PASSWORD=12345
-    ports:
-      - 8081:80
     networks:
       - milsondev_network
 
