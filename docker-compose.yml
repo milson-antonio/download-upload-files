@@ -14,7 +14,7 @@ services:
       DATABASE: "postgres"
       USERNAME: "postgres"
       PASSWORD: "postgres"
-      HOST: "postgres"
+      HOST: "postgres-download-upload-files"
       PORT: "5432"
     volumes:
       - ./src:/usr/src/app/src
@@ -32,9 +32,9 @@ services:
       - ./data/download-upload-files/data:/var/lib/postgresql/data
       - ./db.sql:/docker-entrypoint-initdb.d/db.sql
     environment:
-      PASSWORD: postgres
-      USERNAME: postgres
-      DATABASE: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
     ports:
       - 5432:5432
     networks:
