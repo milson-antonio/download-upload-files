@@ -44,14 +44,14 @@ public class MyFileController {
                              @RequestParam("category") String category,
                              RedirectAttributes attributes)  {
 
-        ModelAndView mv = new ModelAndView("components/table");
+        ModelAndView mv = new ModelAndView("components/upload-table-overlay");
 
         try {
             myFileService.saveFile(file, Category.fromString(category));
             mv.addObject("fileList", myFileService.getMyFileList());
             mv.addObject("categories", myFileService.getCategories());
             mv.addObject("showAlert", true);
-            mv.addObject("alertMessage", "File added successfully!");
+            mv.addObject("alertMessage", "File uploaded successfully...");
         } catch (FileSizeException | MaximumNumberOfFilesExceptions | DuplicateFileException e) {
             mv.addObject("fileList", myFileService.getMyFileList());
             mv.addObject("categories", myFileService.getCategories());
@@ -61,22 +61,21 @@ public class MyFileController {
             mv.addObject("fileList", myFileService.getMyFileList());
             mv.addObject("categories", myFileService.getCategories());
             mv.addObject("showAlert", true);
-            mv.addObject("alertMessage", "Error: when processing the file!");
+            mv.addObject("alertMessage", "Error: when processing the file...");
         } catch (Exception e) {
             mv.addObject("fileList", myFileService.getMyFileList());
             mv.addObject("categories", myFileService.getCategories());
             mv.addObject("showAlert", true);
-            mv.addObject("alertMessage", "Error: unknown when uploading the file!");
+            mv.addObject("alertMessage", "Error: unknown when uploading the file...");
         }
 
         mv.addObject("serverResponse", true);
         return mv;
     }
 
-
     @DeleteMapping(value = "/delete/{id}")
     public ModelAndView deleteFile(@PathVariable UUID id) {
-        ModelAndView mv = new ModelAndView("components/table");
+        ModelAndView mv = new ModelAndView("components/upload-table-overlay");
         myFileService.deleteFile(id);
         mv.addObject("fileList", myFileService.getMyFileList());
         mv.addObject("categories", myFileService.getCategories());
@@ -93,6 +92,5 @@ public class MyFileController {
                         "attachment; filename=\"" + myFile.getOriginalFilename()
                                 + "\"")
                 .body(new ByteArrayResource(myFile.getContent()));
-
     }
 }

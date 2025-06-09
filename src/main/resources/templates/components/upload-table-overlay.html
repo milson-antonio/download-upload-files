@@ -1,0 +1,97 @@
+<div class="" style="position: relative;" id="table-container">
+
+  <div class="container"  style="padding-top:5%">
+    <div class="upload" th:insert="~{components/upload}"> </div>
+    <div class="table" th:insert="~{components/table}"> </div>
+    <div class="overlay" th:insert="~{components/overlay}"> </div>
+  </div>
+
+  <div th:if="${showAlert && alertMessage != null && alertMessage != ''}" th:replace="~{components/alert}"></div>
+
+  <!-- rename the label with file name -->
+  <script>
+    function updateFileName(input) {
+      var fileName = input.files[0].name;
+      var label = input.nextElementSibling;
+      label.innerHTML = fileName;
+    }
+  </script>
+
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    // Hide overlay by default - it should only show during file upload
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('overlay').style.display = 'none';
+    });
+
+    var serverResponse = /*[[${serverResponse}]]*/ false;
+    if (serverResponse) {
+      // Esconder o indicador de carregamento
+      document.getElementById('loading-indicator').style.display = 'none';
+
+      // Desbloquear o contêiner e ocultar o overlay
+      document.getElementById('table-container').classList.remove('disabled');
+      document.getElementById('table-container').style.pointerEvents = "auto";
+      document.getElementById('overlay').style.display = 'none';
+    }
+    /*]]>*/
+  </script>
+
+  <script>
+    document.getElementById('form').addEventListener('submit', function () {
+      const overlay = document.getElementById('overlay');
+      overlay.style.display = 'flex'; // mostra o overlay com spinner
+      document.getElementById('table-container').classList.add('disabled');
+      document.getElementById("table-container").style.pointerEvents = "none";
+    });
+  </script>
+
+  <style>
+    /* Largura padrão da coluna de nome */
+    .col-name {
+      width: 30%;
+      word-break: break-word; /* Evita que nomes longos quebrem layout */
+    }
+
+    /* Em telas menores, diminui a largura da coluna */
+    @media (max-width: 768px) {
+      .col-name {
+        width: 40%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .col-name {
+        width: 100%;
+        display: block;
+      }
+    }
+  </style>
+
+  <style>
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Custom styles for the alert component */
+    #alertID.custom-alert {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+    }
+
+    #alertID.custom-alert .close {
+      margin-left: 10px;
+    }
+
+    /* Make alert responsive but 500px on larger screens */
+    @media (min-width: 768px) {
+      #alertID.custom-alert {
+        width: 500px;
+        max-width: 500px;
+      }
+    }
+
+  </style>
+
+</div>
