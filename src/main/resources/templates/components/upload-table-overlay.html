@@ -1,14 +1,16 @@
 <div class="" style="position: relative;" id="table-container">
 
+  <!-- quase tudo mostrado na página esta aqui -->
   <div class="container"  style="padding-top:5%">
     <div class="upload" th:insert="~{components/upload}"> </div>
     <div class="table" th:insert="~{components/table}"> </div>
     <div class="overlay" th:insert="~{components/overlay}"> </div>
   </div>
 
+  <!-- alert (mostrador de mensagens) -->
   <div th:if="${showAlert && alertMessage != null && alertMessage != ''}" th:replace="~{components/alert}"></div>
 
-  <!-- rename the label with file name -->
+  <!-- funcao js p/ renomear a label do nome do arquivo -->
   <script>
     function updateFileName(input) {
       var fileName = input.files[0].name;
@@ -17,19 +19,17 @@
     }
   </script>
 
+  <!-- funcao js para lidar e esconder por default o overlay -->
   <script th:inline="javascript">
     /*<![CDATA[*/
-    // Hide overlay by default - it should only show during file upload
     document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('overlay').style.display = 'none';
     });
 
     var serverResponse = /*[[${serverResponse}]]*/ false;
     if (serverResponse) {
-      // Esconder o indicador de carregamento
       document.getElementById('loading-indicator').style.display = 'none';
 
-      // Desbloquear o contêiner e ocultar o overlay
       document.getElementById('table-container').classList.remove('disabled');
       document.getElementById('table-container').style.pointerEvents = "auto";
       document.getElementById('overlay').style.display = 'none';
@@ -46,14 +46,13 @@
     });
   </script>
 
+  <!-- some css styles -->
   <style>
-    /* Largura padrão da coluna de nome */
     .col-name {
       width: 30%;
-      word-break: break-word; /* Evita que nomes longos quebrem layout */
+      word-break: break-word;
     }
 
-    /* Em telas menores, diminui a largura da coluna */
     @media (max-width: 768px) {
       .col-name {
         width: 40%;
@@ -73,7 +72,6 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Custom styles for the alert component */
     #alertID.custom-alert {
       width: 100%;
       max-width: 100%;
@@ -84,14 +82,12 @@
       margin-left: 10px;
     }
 
-    /* Make alert responsive but 500px on larger screens */
     @media (min-width: 768px) {
       #alertID.custom-alert {
         width: 500px;
         max-width: 500px;
       }
     }
-
   </style>
 
 </div>
