@@ -2,19 +2,23 @@ package com.milsondev.downloaduploadfiles.db.entity;
 
 import com.milsondev.downloaduploadfiles.api.Category;
 import jakarta.persistence.*;
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.Instant;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tb_my_file")
+@Table(name = "tb_my_file", schema = "download_upload_files")
+@Data
 public class MyFile {
+
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(name = "id", columnDefinition = "uuid")
     private UUID id;
+
     @Column(name="name")
     private String name;
 
@@ -37,82 +41,10 @@ public class MyFile {
     @Column(name ="check_sum")
     private Long checksum;
 
+    @Column(name = "file_path", nullable = false)
+    private String filePath;
+
     @Transient
     private byte[] content;
 
-    public MyFile() {
-
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Instant getUploadDate() {
-        return uploadDate;
-    }
-
-    public void setUploadDate(Instant uploadDate) {
-        this.uploadDate = uploadDate;
-    }
-
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public String getOriginalFilename() {
-        return originalFilename;
-    }
-
-    public void setOriginalFilename(String originalFilename) {
-        this.originalFilename = originalFilename;
-    }
-
-    public String getContentType() {
-        return contentType;
-    }
-
-    public void setContentType(String contentType) {
-        this.contentType = contentType;
-    }
-
-    public Long getChecksum() {
-        return checksum;
-    }
-
-    public void setChecksum(Long checksum) {
-        this.checksum = checksum;
-    }
-
-    public byte[] getContent() {
-        return content;
-    }
-
-    public void setContent(byte[] content) {
-        this.content = content;
-    }
 }
