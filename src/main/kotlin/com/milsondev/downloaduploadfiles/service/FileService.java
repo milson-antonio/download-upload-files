@@ -135,6 +135,7 @@ public class FileService {
                 String path = myFile.getFilePath();
                 byte[] content = storageService.load(path);
                 myFile.setContent(content);
+
                 return myFile;
             }
         return null;

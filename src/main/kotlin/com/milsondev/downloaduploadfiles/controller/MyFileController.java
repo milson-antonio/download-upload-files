@@ -25,6 +25,12 @@ import java.util.UUID;
 @RequestMapping("/")
 public class MyFileController {
 
+    // implementar edit
+    // implementar delete com ou sem toast
+    // escrever testes unitários
+    // escrever testes de integracao
+    // label file name
+
     private final FileService fileService;
 
     @Autowired
