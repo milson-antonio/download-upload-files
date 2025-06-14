@@ -25,11 +25,9 @@ import java.util.UUID;
 @RequestMapping("/")
 public class MyFileController {
 
-    // implementar edit
-    // implementar delete com ou sem toast
-    // escrever testes unitários
-    // escrever testes de integracao
-    // label file name
+    // 2- implementar edit
+    // 3- implementar delete com ou sem toast
+    // 4- escrever testes de integracao
 
     private final FileService fileService;
 
@@ -86,6 +84,7 @@ public class MyFileController {
         mv.addObject("fileList", fileService.getMyFileList());
         mv.addObject("categories", fileService.getCategories());
         mv.addObject("alertMessage", "");
+        mv.addObject("serverResponse", true);
         return mv;
     }
 
@@ -98,5 +97,34 @@ public class MyFileController {
                         "attachment; filename=\"" + myFile.getOriginalFilename()
                                 + "\"")
                 .body(new ByteArrayResource(myFile.getContent()));
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editFileForm(@PathVariable final UUID id,
+                               Model model) {
+        MyFile myFile = fileService.getFileById(id);
+
+        String originalFilename = myFile.getOriginalFilename();
+        if (originalFilename != null && originalFilename.contains(".")) {
+            int lastDotIndex = originalFilename.lastIndexOf('.');
+            String filenameWithoutExtension = originalFilename.substring(0, lastDotIndex);
+            myFile.setOriginalFilename(filenameWithoutExtension);
+        }
+
+        model.addAttribute("file", myFile);
+        model.addAttribute("categories", fileService.getCategories());
+        return "components/modal-content :: editFragment";
+    }
+
+    @PutMapping("/update/{id}")
+    public ModelAndView updateFile(@PathVariable final UUID id,
+                             @RequestParam final String name,
+                             @RequestParam final String category) {
+        fileService.updateFile(id, name, category);
+        ModelAndView mv = new ModelAndView("components/upload-table-overlay");
+        mv.addObject("fileList", fileService.getMyFileList());
+        mv.addObject("categories", fileService.getCategories());
+        mv.addObject("serverResponse", true);
+        return mv;
     }
 }

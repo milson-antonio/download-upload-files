@@ -81,7 +81,6 @@ public class FileService {
                                                final Category category,
                                                final String path) throws IOException {
         MyFile myFile = new MyFile();
-        myFile.setName(file.getName());
         myFile.setOriginalFilename(file.getOriginalFilename());
         myFile.setSize(String.valueOf(file.getSize()));
         myFile.setUploadDate(Instant.now());
@@ -127,7 +126,6 @@ public class FileService {
         }
     }
 
-    @Transactional
     public MyFile downloadFile(final UUID id) throws IOException {
             Optional<MyFile> optionalMyFile = myFileRepository.findById(id);
             if(optionalMyFile.isPresent()){
@@ -135,10 +133,27 @@ public class FileService {
                 String path = myFile.getFilePath();
                 byte[] content = storageService.load(path);
                 myFile.setContent(content);
-
                 return myFile;
             }
         return null;
+    }
+
+    @Transactional
+    public MyFile getFileById(final UUID id) {
+        Optional<MyFile> optionalMyFile = myFileRepository.findById(id);
+        return optionalMyFile.orElse(null);
+    }
+
+    @Transactional
+    public void updateFile(final UUID id, final String newName, final String newCategory) {
+        Optional<MyFile> optionalMyFile = myFileRepository.findById(id);
+        if(optionalMyFile.isPresent()){
+            MyFile myFile = optionalMyFile.get();
+            myFile.setOriginalFilename(newName);
+            myFile.setCategory(Category.fromString(newCategory));
+            LOGGER.info("File updated successfully...");
+            myFileRepository.save(myFile);
+        }
     }
 
     @PostConstruct
@@ -167,7 +182,7 @@ public class FileService {
             for (String physicalPath : physicalPaths) {
                 if (!dbPaths.contains(physicalPath)) {
                     storageService.delete(physicalPath);
-                    LOGGER.info("[CLEANUP] File deleted from the disc (does not exist in the bank): {}", physicalPath);
+                    LOGGER.info("[CLEANUP] File deleted from the disc (does not exist in data base): {}", physicalPath);
                 }
             }
 

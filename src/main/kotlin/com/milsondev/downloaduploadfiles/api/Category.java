@@ -18,9 +18,9 @@ public enum Category {
         return description;
     }
 
-    public static Category fromString(String text) {
-        if (text != null) {
-            String trimmedText = text.trim().replace(" ", "");
+    public static Category fromString(String desc) {
+        if (desc != null) {
+            String trimmedText = desc.trim().replace(" ", "");
             for (Category category : Category.values()) {
                 String trimmedDescription = category.getDescription().trim().replace(" ", "");
                 if (trimmedText.equalsIgnoreCase(trimmedDescription)) {
@@ -28,7 +28,6 @@ public enum Category {
                 }
             }
         }
-        throw new IllegalArgumentException("Nenhum enum com descrição correspondente a " + text);
+        throw new IllegalArgumentException("No enum with description corresponding to " + desc);
     }
 }
-

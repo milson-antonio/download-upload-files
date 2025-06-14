@@ -10,32 +10,35 @@
   <!-- alert (mostrador de mensagens) -->
   <div th:if="${showAlert && alertMessage != null && alertMessage != ''}" th:replace="~{components/alert}"></div>
 
-  <!-- funcao js p/ renomear a label do nome do arquivo -->
-  <script>
-    function updateFileName(input) {
-      var fileName = input.files[0].name;
-      var label = input.nextElementSibling;
-      label.innerHTML = fileName;
-    }
-  </script>
-
   <!-- funcao js para lidar e esconder por default o overlay -->
   <script th:inline="javascript">
     /*<![CDATA[*/
     document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('overlay').style.display = 'none';
+      // Ensure body is not affected by any modal or overlay
+      document.body.style.overflow = 'auto';
+      document.body.style.paddingRight = '0';
     });
 
     var serverResponse = /*[[${serverResponse}]]*/ false;
     if (serverResponse) {
-      document.getElementById('loading-indicator').style.display = 'none';
-
       document.getElementById('table-container').classList.remove('disabled');
       document.getElementById('table-container').style.pointerEvents = "auto";
       document.getElementById('overlay').style.display = 'none';
+
+      // Ensure body is not affected by any modal or overlay
+      document.body.style.overflow = 'auto';
+      document.body.style.paddingRight = '0';
+
+      // Force any modal backdrop to be removed
+      const modalBackdrops = document.querySelectorAll('.modal-backdrop');
+      modalBackdrops.forEach(backdrop => {
+        backdrop.remove();
+      });
     }
     /*]]>*/
   </script>
+
 
   <script>
     document.getElementById('form').addEventListener('submit', function () {
@@ -45,6 +48,8 @@
       document.getElementById("table-container").style.pointerEvents = "none";
     });
   </script>
+
+
 
   <!-- some css styles -->
   <style>

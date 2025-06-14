@@ -21,3 +21,30 @@
         </div>
     </form>
 </div>
+
+<style>
+    .custom-file-label {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+    }
+</style>
+
+<!-- funcao js p/ renomear a label do nome do arquivo -->
+<script>
+    function updateFileName(input) {
+        var fileName = input.files[0].name;
+        var label = input.nextElementSibling;
+        var maxLength = 30;
+
+        if (fileName.length > maxLength) {
+            var extension = fileName.substring(fileName.lastIndexOf('.'));
+            var shortName = fileName.substring(0, maxLength - extension.length - 3) + '...' + extension;
+            label.innerHTML = shortName;
+        } else {
+            label.innerHTML = fileName;
+        }
+        label.title = fileName;
+    }
+</script>

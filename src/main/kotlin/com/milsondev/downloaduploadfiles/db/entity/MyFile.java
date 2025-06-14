@@ -19,9 +19,6 @@ public class MyFile {
     @Column(name = "id", columnDefinition = "uuid")
     private UUID id;
 
-    @Column(name="name")
-    private String name;
-
     @Column(name="upload_date")
     private Instant uploadDate;
 
