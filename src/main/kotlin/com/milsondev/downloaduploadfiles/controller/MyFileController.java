@@ -25,9 +25,6 @@ import java.util.UUID;
 @RequestMapping("/")
 public class MyFileController {
 
-    // 3- implementar delete com ou sem toast
-    // 4- escrever testes de integracao
-
     private final FileService fileService;
 
     @Autowired
@@ -83,9 +80,9 @@ public class MyFileController {
     }
 
     @DeleteMapping(value = "/delete/{id}")
-    public ModelAndView deleteFile(@PathVariable final String id) throws IOException {
+    public ModelAndView deleteFile(@PathVariable final UUID id) throws IOException {
         ModelAndView mv = new ModelAndView("components/upload-table-overlay");
-        fileService.deleteFile(UUID.fromString(id));
+        fileService.deleteFile(id);
         mv.addObject("fileList", fileService.getMyFileList());
         mv.addObject("categories", fileService.getCategories());
         mv.addObject("alertMessage", "");
@@ -105,8 +102,7 @@ public class MyFileController {
     }
 
     @GetMapping("/edit/{id}")
-    public String editFileForm(@PathVariable final UUID id,
-                               Model model) {
+    public String editFileForm(@PathVariable final UUID id, Model model) {
         MyFile myFile = fileService.getFileById(id);
 
         String originalFilename = myFile.getOriginalFilename();
