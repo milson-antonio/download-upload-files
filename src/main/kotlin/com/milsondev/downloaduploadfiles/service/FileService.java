@@ -149,7 +149,15 @@ public class FileService {
         Optional<MyFile> optionalMyFile = myFileRepository.findById(id);
         if(optionalMyFile.isPresent()){
             MyFile myFile = optionalMyFile.get();
-            myFile.setOriginalFilename(newName);
+
+            String originalFilename = myFile.getOriginalFilename();
+            String extension = "";
+            int lastDotIndex = originalFilename.lastIndexOf('.');
+            if (lastDotIndex > 0 && lastDotIndex < originalFilename.length() - 1) {
+                extension = originalFilename.substring(lastDotIndex);
+            }
+
+            myFile.setOriginalFilename(newName + extension);
             myFile.setCategory(Category.fromString(newCategory));
             LOGGER.info("File updated successfully...");
             myFileRepository.save(myFile);

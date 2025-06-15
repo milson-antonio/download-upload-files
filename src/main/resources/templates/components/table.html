@@ -46,10 +46,12 @@
             </td>
 
             <td>
-                <button type="button" class="btn btn-outline-danger btn-sm"
-                        th:attr="hx-delete=@{/delete/{id}(id=${file.id})},hx-target='#table-container'"
+                <button class="btn btn-outline-danger btn-sm"
+                        th:attr="hx-get=@{/delete-confirmation/{id}(id=${file.id})}"
+                        hx-target="#deleteModal .modal-content"
                         hx-trigger="click"
-                        hx-swap="outerHTML">
+                        data-toggle="modal"
+                        data-target="#deleteModal">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                          fill="currentColor"
                          class="bi bi-trash3" viewBox="0 0 16 16">
@@ -72,3 +74,13 @@
         </div>
     </div>
 </div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" id="deleteModalContent">
+            <!-- Conteúdo carregado dinamicamente via HTMX -->
+        </div>
+    </div>
+</div>
+
